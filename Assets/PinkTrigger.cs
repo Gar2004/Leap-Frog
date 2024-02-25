@@ -10,6 +10,7 @@ public class PinkTrigger : MonoBehaviour
     //public static PinkTrigger instance;
     public P1Control player;
     public Text scoreText;
+    public Text winText;
     int pink_score = 0;
 
     bool canScore;
@@ -23,6 +24,7 @@ public class PinkTrigger : MonoBehaviour
         scoreText.text = pink_score.ToString() + " Pink Points";
         Debug.Log(pink_score.ToString() + " Pink Points");
         canScore = true;
+        winText.text = ""; // Assign an empty string to the text property of winText
     }
 
 
@@ -36,6 +38,10 @@ public class PinkTrigger : MonoBehaviour
             Debug.Log(pink_score.ToString() + " Pink Points");
             canScore = false;
             StartCoroutine("SetCanScore");
+            if (pink_score == 4)
+            {
+                winText.text = "Pink Wins!";
+            }
         }
 
     }

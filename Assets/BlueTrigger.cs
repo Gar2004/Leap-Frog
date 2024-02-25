@@ -8,6 +8,8 @@ public class BlueTrigger : MonoBehaviour
     // allows controllers/other scripts to access this script
     public P2Control player;
     public Text scoreText;
+
+    public Text winText;
     int blue_score = 0;
     bool canScore;
 
@@ -20,6 +22,7 @@ public class BlueTrigger : MonoBehaviour
         scoreText.text = blue_score.ToString() + " Blue Points";
         Debug.Log(blue_score.ToString() + " Blue Points");
         canScore = true;
+        winText.text = ""; // Assign an empty string to the text property of winText
     }
 
 
@@ -33,6 +36,10 @@ public class BlueTrigger : MonoBehaviour
             Debug.Log(blue_score.ToString() + " Blue Points");
             canScore = false;
             StartCoroutine("SetCanScore");
+            if (blue_score == 4)
+            {
+                winText.text = "Blue Wins!";
+            }
         }
 
     }

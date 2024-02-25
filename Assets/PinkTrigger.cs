@@ -40,6 +40,16 @@ public class PinkTrigger : MonoBehaviour
 
     }
 
+    public void MinusPoint()
+    {
+        pink_score -= 1;
+        scoreText.text = pink_score.ToString() + " Pink Points";
+        Debug.Log(pink_score.ToString() + " Pink Points");
+        canScore = false;
+        StartCoroutine("SetCanScore");
+
+    }
+
     IEnumerator SetCanScore()
     {
         yield return new WaitForSeconds(1);

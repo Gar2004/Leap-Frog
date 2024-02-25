@@ -37,6 +37,16 @@ public class BlueTrigger : MonoBehaviour
 
     }
 
+    public void MinusPoint()
+    {
+        blue_score -= 1;
+        scoreText.text = blue_score.ToString() + " Blue Points";
+        Debug.Log(blue_score.ToString() + " Blue Points");
+        canScore = false;
+        StartCoroutine("SetCanScore");
+
+    }
+
     IEnumerator SetCanScore()
     {
         yield return new WaitForSeconds(1);

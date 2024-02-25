@@ -79,5 +79,9 @@ public class P2Control : MonoBehaviour
         {
             blueTrigger.AddPoint();
         }
+        if (other.gameObject.CompareTag("lava"))
+        {
+            blueTrigger.MinusPoint();
+        }
     }
 }

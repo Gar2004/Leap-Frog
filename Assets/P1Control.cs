@@ -61,6 +61,11 @@ public class P1Control : MonoBehaviour
             // Add a point
             pinkTrigger.AddPoint();
         }
+
+        if (other.gameObject.CompareTag("lava"))
+        {
+            pinkTrigger.MinusPoint();
+        }
     }
 }
 

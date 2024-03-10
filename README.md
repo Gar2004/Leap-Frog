@@ -5,3 +5,5 @@ To ensure that only the leaper gets the point and not the player leapt over I on
 I also added a clear UI display early on to make the scores/winner visible to the player. This along with additional objects (some that take away points from characters upon contact "these ones are red") upped the skill level players would need with their controls to gain points. 
 # Commit Two Notes
 Added Win text to game. Experienced some issues with github merging on this push hopefully nothing is broken...
+# Commit Three Notes
+Struggled with this one created inventory for both players and put the scoring system through a Manager design pattern. 

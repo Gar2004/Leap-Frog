@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class P2Control : MonoBehaviour
 {
-    public BlueTrigger blueTrigger;
+    public Blue_PlayerManager player;
 
 
     public bool isJumping = false;
@@ -14,6 +14,9 @@ public class P2Control : MonoBehaviour
     public float rotationSpeed = 90;
     public float gravity = -20f;
     public float jumpSpeed = 15;
+
+    public float pushForce = 3.0f; //Amount of force to apply
+    private ControllerColliderHit contact;
     CharacterController characterController;
     Vector3 moveVelocity;
     Vector3 turnVelocity;
@@ -77,11 +80,22 @@ public class P2Control : MonoBehaviour
         // Debug.Log("B Triggered");
         if (other.gameObject.CompareTag("Pink"))
         {
-            blueTrigger.AddPoint();
+            player.AddPoint();
         }
         if (other.gameObject.CompareTag("lava"))
         {
-            blueTrigger.MinusPoint();
+            player.MinusPoint();
+        }
+    }
+
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        contact = hit;
+
+        Rigidbody body = hit.collider.attachedRigidbody;
+        if (body != null && !body.isKinematic)
+        {
+            body.velocity = hit.moveDirection * pushForce;
         }
     }
 }

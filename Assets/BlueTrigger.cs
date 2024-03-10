@@ -1,16 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BlueTrigger : MonoBehaviour
+public class BlueTrigger : MonoBehaviour, IGameManager
 {
+    public ManagerStatus status { get; private set; }
+
+    public int blue_score { get; private set; }
+
+    public int win_score { get; private set; }
+
+    public void Startup()
+    {
+        Debug.Log("Blue manager starting...");
+        blue_score = 0;
+        win_score = 4;
+        status = ManagerStatus.Started;
+    }
+
+
     // allows controllers/other scripts to access this script
     public P2Control player;
-    public Text scoreText;
 
-    public Text winText;
-    int blue_score = 0;
     bool canScore;
 
     /* private void Awake()
@@ -19,10 +32,10 @@ public class BlueTrigger : MonoBehaviour
      }*/
     void Start()
     {
-        scoreText.text = blue_score.ToString() + " Blue Points";
+        //scoreText.text = blue_score.ToString() + " Blue Points";
         Debug.Log(blue_score.ToString() + " Blue Points");
         canScore = true;
-        winText.text = ""; // Assign an empty string to the text property of winText
+        //winText.text = ""; // Assign an empty string to the text property of winText
     }
 
 
@@ -32,13 +45,13 @@ public class BlueTrigger : MonoBehaviour
         if (player.isJumping && canScore == true)
         {
             blue_score += 1;
-            scoreText.text = blue_score.ToString() + " Blue Points";
+            //scoreText.text = blue_score.ToString() + " Blue Points";
             Debug.Log(blue_score.ToString() + " Blue Points");
             canScore = false;
             StartCoroutine("SetCanScore");
             if (blue_score == 4)
             {
-                winText.text = "Blue Wins!";
+                blue_score = win_score;
             }
         }
 
@@ -47,7 +60,7 @@ public class BlueTrigger : MonoBehaviour
     public void MinusPoint()
     {
         blue_score -= 1;
-        scoreText.text = blue_score.ToString() + " Blue Points";
+        //scoreText.text = blue_score.ToString() + " Blue Points";
         Debug.Log(blue_score.ToString() + " Blue Points");
         canScore = false;
         StartCoroutine("SetCanScore");

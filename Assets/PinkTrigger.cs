@@ -4,14 +4,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PinkTrigger : MonoBehaviour
+public class PinkTrigger : MonoBehaviour, IGameManager
 {
+    public ManagerStatus status { get; private set; }
+
+    public int pink_score { get; private set; }
+    public int win_score { get; private set; }
+    public void Startup()
+    {
+        Debug.Log("Pink manager starting...");
+        pink_score = 0;
+        win_score = 4;
+        status = ManagerStatus.Started;
+    }
     // allows controllers/other scripts to access this script
     //public static PinkTrigger instance;
     public P1Control player;
-    public Text scoreText;
-    public Text winText;
-    int pink_score = 0;
+    //public Text scoreText;
+    //public Text winText;
 
     bool canScore;
 
@@ -21,10 +31,10 @@ public class PinkTrigger : MonoBehaviour
      }*/
     void Start()
     {
-        scoreText.text = pink_score.ToString() + " Pink Points";
+        //scoreText.text = pink_score.ToString() + " Pink Points";
         Debug.Log(pink_score.ToString() + " Pink Points");
         canScore = true;
-        winText.text = ""; // Assign an empty string to the text property of winText
+        //winText.text = ""; // Assign an empty string to the text property of winText
     }
 
 
@@ -34,13 +44,13 @@ public class PinkTrigger : MonoBehaviour
         if (player.isJumping && canScore == true)
         {
             pink_score += 1;
-            scoreText.text = pink_score.ToString() + " Pink Points";
+            //scoreText.text = pink_score.ToString() + " Pink Points";
             Debug.Log(pink_score.ToString() + " Pink Points");
             canScore = false;
             StartCoroutine("SetCanScore");
             if (pink_score == 4)
             {
-                winText.text = "Pink Wins!";
+                pink_score = win_score;
             }
         }
 
@@ -49,7 +59,7 @@ public class PinkTrigger : MonoBehaviour
     public void MinusPoint()
     {
         pink_score -= 1;
-        scoreText.text = pink_score.ToString() + " Pink Points";
+        //scoreText.text = pink_score.ToString() + " Pink Points";
         Debug.Log(pink_score.ToString() + " Pink Points");
         canScore = false;
         StartCoroutine("SetCanScore");

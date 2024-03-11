@@ -40,7 +40,7 @@ public class BlueTrigger : MonoBehaviour, IGameManager
 
 
 
-    public void AddPoint()
+    /*public void AddPoint()
     {
         if (player.isJumping && canScore == true)
         {
@@ -55,7 +55,7 @@ public class BlueTrigger : MonoBehaviour, IGameManager
             }
         }
 
-    }
+    }*/
 
     public void MinusPoint()
     {

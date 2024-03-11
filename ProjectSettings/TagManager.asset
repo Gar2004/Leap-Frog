@@ -8,6 +8,8 @@ TagManager:
   - Blue
   - Ground
   - lava
+  - item
+  - Coin
   layers:
   - Default
   - TransparentFX

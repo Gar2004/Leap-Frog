@@ -10,17 +10,21 @@ public class Pink_PlayerManager : MonoBehaviour, Pink_IGameManager
     public int pink_score { get; private set; }
     //public int win_score { get; private set; }
     public P1Control player;
+
+    //public Blue_PlayerManager Blue;
+
+    // [SerializeField] TimerScript TimeLeft;
     public Text scoreText;
     // public Text winText;
 
-    bool canScore;
+    //bool canScore;
 
     public void Startup()
     {
         Debug.Log("Pink player manager starting...");
         pink_score = 0;
         // win_score = 4;
-        canScore = true;
+        //canScore = true;
         status = Pink_ManagerStatus.Started;
         scoreText.text = pink_score.ToString() + " Pink Points";
         //winText.text = "";
@@ -28,19 +32,22 @@ public class Pink_PlayerManager : MonoBehaviour, Pink_IGameManager
 
     public void AddPoint()
     {
-        if (player.isJumping && canScore == true)
+
+        pink_score += 1;
+        scoreText.text = pink_score.ToString() + " Pink Points";
+        Debug.Log(pink_score.ToString() + " Pink Points");
+        //canScore = false;
+        // StartCoroutine("SetCanScore");
+        /*if (TimeLeft.TimeLeft <= 0 && pink_score > Blue.blue_score)
         {
-            pink_score += 1;
-            scoreText.text = pink_score.ToString() + " Pink Points";
-            Debug.Log(pink_score.ToString() + " Pink Points");
-            canScore = false;
-            StartCoroutine("SetCanScore");
-            if (pink_score == 4)
-            {
-                scoreText.text = "Pink Wins!";
-                //winText.text = "Pink Wins!";
-            }
+            scoreText.text = "Pink Wins!";
+            //winText.text = "Pink Wins!";
         }
+        if (TimeLeft.TimeLeft <= 0 && pink_score == Blue.blue_score)
+        {
+            scoreText.text = "Tie!";
+        }*/
+
 
     }
 
@@ -49,16 +56,26 @@ public class Pink_PlayerManager : MonoBehaviour, Pink_IGameManager
         pink_score -= 1;
         scoreText.text = pink_score.ToString() + " Pink Points";
         Debug.Log(pink_score.ToString() + " Pink Points");
-        canScore = false;
-        StartCoroutine("SetCanScore");
+        //canScore = false;
+        // StartCoroutine("SetCanScore");
+        /* if (TimeLeft.TimeLeft <= 0 && pink_score > Blue.blue_score)
+         {
+             scoreText.text = "Pink Wins!";
+             //winText.text = "Pink Wins!";
+         }
+         if (TimeLeft.TimeLeft <= 0 && pink_score == Blue.blue_score)
+         {
+             scoreText.text = "Tie!";
+         }*/
+
 
     }
 
-    IEnumerator SetCanScore()
-    {
-        yield return new WaitForSeconds(1);
-        canScore = true;
-    }
+    /* IEnumerator SetCanScore()
+     {
+         yield return new WaitForSeconds(1);
+         canScore = true;
+     }*/
 
 
 }

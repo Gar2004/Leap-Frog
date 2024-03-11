@@ -8,7 +8,7 @@ public class P1Control : MonoBehaviour
 {
     //[SerializeField] Transform target;
     public Pink_PlayerManager player;
-    public bool isJumping = false;
+    // public bool isJumping = false;
     public float speed = 3;
     public float rotationSpeed = 90;
     public float gravity = -20f;
@@ -36,18 +36,18 @@ public class P1Control : MonoBehaviour
         if (characterController.isGrounded)
         {
             // If the player was jumping and is now grounded, they have landed
-            if (isJumping)
-            {
-                isJumping = false;
-            }
+            /* if (isJumping)
+             {
+                 isJumping = false;
+             }*/
 
             moveVelocity = transform.forward * speed * vInput;
             turnVelocity = transform.up * rotationSpeed * hInput;
 
-            if (Input.GetKey(KeyCode.S) && !isJumping)
+            if (Input.GetKey(KeyCode.S))
             {
                 moveVelocity.y = jumpSpeed;
-                isJumping = true;
+                // isJumping = true;
             }
         }
 
@@ -60,16 +60,18 @@ public class P1Control : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         // Check if the player collided with the trigger
-        if (other.gameObject.CompareTag("Blue"))
+        if (other.transform.tag == "Coin")
         {
             //Debug.Log("p Triggered");
             // Add a point
             player.AddPoint();
+            Destroy(other.gameObject);
         }
 
         if (other.gameObject.CompareTag("lava"))
         {
             player.MinusPoint();
+            Destroy(other.gameObject);
         }
     }
 

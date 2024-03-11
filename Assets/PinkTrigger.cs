@@ -41,7 +41,7 @@ public class PinkTrigger : MonoBehaviour, IGameManager
 
     public void AddPoint()
     {
-        if (player.isJumping && canScore == true)
+        if (canScore == true)
         {
             pink_score += 1;
             //scoreText.text = pink_score.ToString() + " Pink Points";

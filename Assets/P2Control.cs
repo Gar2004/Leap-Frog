@@ -1,15 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using JetBrains.Annotations;
 using UnityEditor;
 using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class P2Control : MonoBehaviour
 {
-    public Blue_PlayerManager player;
+    public Blue_PlayerManager playerManager;
 
 
-    public bool isJumping = false;
+
+    // public bool isJumping = false;
     public float speed = 3;
     public float rotationSpeed = 90;
     public float gravity = -20f;
@@ -57,16 +59,16 @@ public class P2Control : MonoBehaviour
 
         if (characterController.isGrounded)
         {
-            if (isJumping)
+            /*if (isJumping)
             {
                 isJumping = false;
-            }
+            }*/
             moveVelocity = transform.forward * speed * vInput;
             turnVelocity = transform.up * rotationSpeed * hInput;
-            if (Input.GetKey(KeyCode.K) && !isJumping)
+            if (Input.GetKey(KeyCode.K))
             {
                 moveVelocity.y = jumpSpeed;
-                isJumping = true;
+                // isJumping = true;
             }
         }
         //Adding gravity
@@ -75,16 +77,19 @@ public class P2Control : MonoBehaviour
         transform.Rotate(turnVelocity * Time.deltaTime);
     }
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         // Debug.Log("B Triggered");
-        if (other.gameObject.CompareTag("Pink"))
+        if (other.transform.tag == "Coin")
         {
-            player.AddPoint();
+            playerManager.AddPoint();
+            Debug.Log("Point");
+            Destroy(other.gameObject);
         }
         if (other.gameObject.CompareTag("lava"))
         {
-            player.MinusPoint();
+            playerManager.MinusPoint();
+            Destroy(other.gameObject);
         }
     }
 

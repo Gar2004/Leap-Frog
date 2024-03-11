@@ -7,3 +7,5 @@ I also added a clear UI display early on to make the scores/winner visible to th
 Added Win text to game. Experienced some issues with github merging on this push hopefully nothing is broken...
 # Commit Three Notes
 Struggled with this one created inventory for both players and put the scoring system through a Manager design pattern. 
+# Commit Four
+Replaced leap frog mechanism with sphere collection point mechanism. Players have one minute to collect as many yellow spheres as possible (red substracts points from players). The player with the most points by the end of the timer wins. 
